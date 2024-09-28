@@ -4,6 +4,8 @@ import {PrimemodulesModule} from './primemodules/primemodules.module'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
     AppRoutingModule,
     PrimemodulesModule
   ],
-  providers: [],
+  providers: [
+    provideFirebaseApp(() => initializeApp({"projectId":"blogadmin-ef12c","appId":"1:709759401901:web:6512f617f383f172f02b24","storageBucket":"blogadmin-ef12c.appspot.com","apiKey":"AIzaSyBcpUvRsBqLqWwEovj3gXX48jsAbZ0HROk","authDomain":"blogadmin-ef12c.firebaseapp.com","messagingSenderId":"709759401901"})),
+    provideFirestore(() => getFirestore())
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
