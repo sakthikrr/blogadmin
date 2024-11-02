@@ -7,6 +7,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http'; // Import HttpClientMod
     BrowserModule,
     AppRoutingModule,
     PrimemodulesModule,
-    HttpClientModule // Add HttpClientModule here
+    HttpClientModule, // Add HttpClientModule here
+    LayoutModule
   ],
   providers: [
     provideFirebaseApp(() => initializeApp({"projectId":"blogadmin-ef12c","appId":"1:709759401901:web:6512f617f383f172f02b24","storageBucket":"blogadmin-ef12c.appspot.com","apiKey":"AIzaSyBcpUvRsBqLqWwEovj3gXX48jsAbZ0HROk","authDomain":"blogadmin-ef12c.firebaseapp.com","messagingSenderId":"709759401901"})),

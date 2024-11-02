@@ -15,6 +15,11 @@ import {PrimemodulesModule} from '../primemodules/primemodules.module'
   imports: [
     CommonModule,
     PrimemodulesModule,
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent
   ]
 })
 export class LayoutModule { }
