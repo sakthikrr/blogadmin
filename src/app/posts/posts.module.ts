@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {PrimemodulesModule} from '../primemodules/primemodules.module'
 import { PostsRoutingModule } from './posts-routing.module';
 import { PostlistComponent } from './postlist/postlist.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,8 @@ import { PostlistComponent } from './postlist/postlist.component';
   imports: [
     CommonModule,
     PostsRoutingModule,
-    PrimemodulesModule
+    PrimemodulesModule,
+    HttpClientModule
   ]
 })
 export class PostsModule { }
