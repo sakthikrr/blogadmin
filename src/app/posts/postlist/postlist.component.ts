@@ -1,18 +1,7 @@
 import { Component } from '@angular/core';
 import {PostsService} from './../posts.service'
 import { PostList } from '../postlist.interface';
- interface Product {
-  id?: string;
-  code?: string;
-  name?: string;
-  description?: string;
-  price?: number;
-  quantity?: number;
-  inventoryStatus?: string;
-  category?: string;
-  image?: string;
-  rating?: number;
-}
+import {FormGroup, FormControl} from '@angular/forms';
 interface POSTS{
     id:number;
     slug:string;
@@ -24,10 +13,15 @@ interface POSTS{
   styleUrl: './postlist.component.css'
 })
 export class PostlistComponent {
-
 PostListdata:POSTS[]=[];
 PostsList:PostList[]=[]
- constructor(private postser:PostsService){}
+postquickedit: FormGroup;
+
+ constructor(private postser:PostsService){
+    this.postquickedit = new FormGroup({
+        post_tile: new FormControl(''),
+      });
+ }
   ngOnInit(): void {
     this.postser.getPosts().subscribe((data)=>{
         this.PostsList = data;
@@ -46,7 +40,6 @@ PostsList:PostList[]=[]
   visible: boolean = false;
 
     showDialog(id:number) {
-        console.log(id)
-        this.visible = true;
+         this.visible = true;
     }
 }

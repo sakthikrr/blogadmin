@@ -22,7 +22,10 @@
 </div>
 
 
-<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-    <span class="p-text-secondary block mb-5">Update your information.</span>
-   
+<p-dialog header="Post Quick Edit" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
+    <form [formGroup]="postquickedit">
+        <label for="ptitle">Post Title:</label>
+        <input id="ptitle" type="text" formControlName="post_tile">
+     
+      </form>
 </p-dialog>

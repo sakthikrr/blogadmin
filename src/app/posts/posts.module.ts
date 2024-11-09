@@ -4,6 +4,7 @@ import {PrimemodulesModule} from '../primemodules/primemodules.module'
 import { PostsRoutingModule } from './posts-routing.module';
 import { PostlistComponent } from './postlist/postlist.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms'; // Import this
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     PostsRoutingModule,
     PrimemodulesModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class PostsModule { }
