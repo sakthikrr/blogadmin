@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { SidebarModule } from 'primeng/sidebar';
 import { PanelMenuModule } from 'primeng/panelmenu';
-
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [],
   imports: [
@@ -12,13 +12,15 @@ import { PanelMenuModule } from 'primeng/panelmenu';
     ButtonModule,
     TableModule,
     SidebarModule,
-    PanelMenuModule
+    PanelMenuModule,
+    DialogModule
   ],
   exports: [  // Export ButtonModule to make it available for other modules
     ButtonModule,
     TableModule,
     SidebarModule,
-    PanelMenuModule
+    PanelMenuModule,
+    DialogModule
   ]
 
 })
