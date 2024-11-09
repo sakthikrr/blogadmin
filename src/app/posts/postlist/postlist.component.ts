@@ -45,7 +45,8 @@ PostsList:PostList[]=[]
   }
   visible: boolean = false;
 
-    showDialog() {
+    showDialog(id:number) {
+        console.log(id)
         this.visible = true;
     }
 }
