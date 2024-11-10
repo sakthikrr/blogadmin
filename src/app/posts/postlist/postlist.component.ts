@@ -20,6 +20,7 @@ postquickedit: FormGroup;
  constructor(private postser:PostsService){
     this.postquickedit = new FormGroup({
       post_title: new FormControl(''),
+      post_id:new FormControl('')
       });
  }
   ngOnInit(): void {
@@ -44,11 +45,10 @@ postquickedit: FormGroup;
          this.postser.getSinglePost(id).subscribe(
           {
             next: (data) => {
-              // Patch the title value into the form
               this.postquickedit.patchValue({
-                post_title: data?.title?.rendered || ''
+                post_title: data?.title?.rendered || '',
+                post_id:data.id
               });
-              // Show the dialog
               this.visible = true;
             },
             error: (error) => {
@@ -56,5 +56,16 @@ postquickedit: FormGroup;
             }
           }
          )
+    }
+
+    onSubmit(): void {
+      
+      const formData = {
+        id: this.postquickedit.value.post_id,
+        title: this.postquickedit.value.post_title
+      };
+      this.postser.postQuickUpdate(this.postquickedit.value.post_id,formData).subscribe(data=>{
+        console.log(data);
+      })
     }
 }

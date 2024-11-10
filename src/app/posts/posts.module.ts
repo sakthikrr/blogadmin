@@ -4,11 +4,13 @@ import {PrimemodulesModule} from '../primemodules/primemodules.module'
 import { PostsRoutingModule } from './posts-routing.module';
 import { PostlistComponent } from './postlist/postlist.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms'; // Import this
+import { ReactiveFormsModule } from '@angular/forms';
+import { PosteditComponent } from './postedit/postedit.component'; // Import this
 
 @NgModule({
   declarations: [
-    PostlistComponent
+    PostlistComponent,
+    PosteditComponent
   ],
   imports: [
     CommonModule,

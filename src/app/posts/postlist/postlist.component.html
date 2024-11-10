@@ -23,9 +23,11 @@
 
 
 <p-dialog header="Post Quick Edit" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
-    <form [formGroup]="postquickedit">
+    <form [formGroup]="postquickedit" (ngSubmit)="onSubmit()">
         <label for="ptitle">Post Title:</label>
         <input id="ptitle" type="text" formControlName="post_title">
-     
+        <input id="post_id" type="hidden" formControlName="post_id">
+        <p-button label="Submit" type="submit"></p-button>
+
       </form>
 </p-dialog>
