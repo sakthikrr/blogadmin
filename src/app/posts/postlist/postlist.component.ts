@@ -19,7 +19,7 @@ postquickedit: FormGroup;
 
  constructor(private postser:PostsService){
     this.postquickedit = new FormGroup({
-        post_tile: new FormControl(''),
+      post_title: new FormControl(''),
       });
  }
   ngOnInit(): void {
@@ -40,6 +40,21 @@ postquickedit: FormGroup;
   visible: boolean = false;
 
     showDialog(id:number) {
-         this.visible = true;
+        
+         this.postser.getSinglePost(id).subscribe(
+          {
+            next: (data) => {
+              // Patch the title value into the form
+              this.postquickedit.patchValue({
+                post_title: data?.title?.rendered || ''
+              });
+              // Show the dialog
+              this.visible = true;
+            },
+            error: (error) => {
+              console.error('Failed to fetch the post:', error);
+            }
+          }
+         )
     }
 }
