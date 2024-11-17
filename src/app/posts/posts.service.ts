@@ -22,10 +22,8 @@ export class PostsService {
       const post = this.httpcli.get<PostList>(`${this.baseUrl}posts/${id}`)
       return post;
   }
-  postQuickUpdate(id:number,formdata:{ id: number,
-    title: string}){
+  postQuickUpdate(id:number,formdata:{ id: number,title: string}){
     const url = `${this.baseUrl}posts/${id}`;
-  
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.authHeader
