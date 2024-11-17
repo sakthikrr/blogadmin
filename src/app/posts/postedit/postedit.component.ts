@@ -26,7 +26,7 @@ export class PosteditComponent {
         next: (data:any) => {
           this.postForm.patchValue({
             post_title: data?.title?.rendered || '',
-            post_content:data?.title?.rendered || '',
+            post_content:data?.content?.rendered || '',
           });
          
         }
