@@ -1,0 +1,5 @@
+Deployment comment:
+create build comment:
+ng build --base-href "https://sakthikrr.github.io/blogadmin/"
+Deploy Github pages via below comment via partcular folder:
+npx angular-cli-ghpages --dir=dist/blogadmin/browser
