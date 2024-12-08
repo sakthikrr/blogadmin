@@ -1,5 +1,5 @@
 <div class="card m-2">
-<form [formGroup]="postForm" >
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
   <div class="field grid">
     <label for="post_title" class="col-fixed" style="width:100px">Post Title:</label>
     <input id="post_title" formControlName="post_title" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">

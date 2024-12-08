@@ -32,4 +32,15 @@ export class PostsService {
     return this.httpcli.put(url, formdata, { headers: headers });
 
   }
+
+  postUpdate(id:number,formdata:{ id: number,title: string}){
+    const url = `${this.baseUrl}posts/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.authHeader
+    });
+
+    return this.httpcli.put(url, formdata, { headers: headers });
+
+  }
 }
