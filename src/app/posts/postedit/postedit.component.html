@@ -1,9 +1,15 @@
+<div class="card m-2">
 <form [formGroup]="postForm" >
-    <label for="post_title">Post Title:</label>
-    <input id="post_title" formControlName="post_title" type="text">
-    
-    <label for="post_content">Post Content:</label>
-    <textarea id="post_content" formControlName="post_content"></textarea>
+  <div class="field grid">
+    <label for="post_title" class="col-fixed" style="width:100px">Post Title:</label>
+    <input id="post_title" formControlName="post_title" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+  </div>
+  <div class="field grid">
+    <label for="post_content" class="col-fixed" style="width:100px">Post Content:</label>
+    <textarea  rows="4" cols="50" id="post_content" formControlName="post_content" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"></textarea>
+  </div>
   
-    <button type="submit" [disabled]="postForm.invalid">Submit</button>
+    <p-button type="submit" label="Submit" />
+
   </form>
+</div>

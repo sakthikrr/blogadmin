@@ -33,4 +33,9 @@ export class PosteditComponent {
       }
      )
   }
+  onSubmit(): void {
+    if (this.postForm.valid) {
+      console.log(this.postForm.value);
+    }
+  }
 }
