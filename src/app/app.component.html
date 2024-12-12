@@ -1,6 +1,16 @@
 <app-header></app-header>
-    <div class="main-container flex w-9 m-auto">
-     <div class="sidebar"><app-sidebar></app-sidebar></div>
-     <div class="content-area"><router-outlet></router-outlet></div>
+<div class="flex flex-row min-h-screen">
+    <!-- Sidebar with fixed 25% width -->
+    <div class="sidebar" style="flex: 0 0 20%; max-width: 20%; background-color: #f4f4f4;">
+      <app-sidebar></app-sidebar>
     </div>
-<app-footer></app-footer>
+  
+    <!-- Main container with 75% width -->
+    <div class="main-container flex flex-column" style="flex: 1; background-color: #ffffff;">
+    
+      <div class="content-area" style="flex: 1; padding: 16px;">
+        <router-outlet></router-outlet>
+      </div>
+      <!-- <app-footer></app-footer> -->
+    </div>
+  </div>

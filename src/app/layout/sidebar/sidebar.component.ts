@@ -8,7 +8,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class SidebarComponent {
   items!: MenuItem[];
-  sidebarVisible: boolean = false;
+  sidebarVisible: boolean = true;
   showSidebar() {
     this.sidebarVisible = true;
   }

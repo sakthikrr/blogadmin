@@ -1,12 +1,14 @@
-<div class="sidebar-container">
-<p-sidebar 
- [(visible)]="sidebarVisible"  
- class="p-sidebar-md"
- [showCloseIcon]="true"
- >
- <div class="card flex justify-content-center">
-    <p-panelMenu [model]="items" styleClass="w-full md:w-20rem" />
-</div>
-</p-sidebar>
-<p-button (onClick)="sidebarVisible = true" icon="pi pi-arrow-right"></p-button>
+<div class="sidebar-container w-full">
+    <!-- <p-sidebar 
+    [(visible)]="sidebarVisible"  
+    class="p-sidebar-md"
+    [showCloseIcon]="false" 
+  
+    [baseZIndex]="10000"
+    >
+   
+    </p-sidebar> -->
+    <p-panelMenu [model]="items" styleClass="w-full flex-grow"  />
+
+    <!-- <p-button (onClick)="sidebarVisible = true" icon="pi pi-arrow-right"></p-button> -->
 </div>
