@@ -15,6 +15,7 @@ export class PosteditComponent {
     this.postForm = this.fb.group({
       post_title: ['', Validators.required],
       post_content: ['', Validators.required],
+      post_id: ['']
     });
   }
 
@@ -27,6 +28,7 @@ export class PosteditComponent {
           this.postForm.patchValue({
             post_title: data?.title?.rendered || '',
             post_content:data?.content?.rendered || '',
+            post_id:data.id
           });
          
         }
@@ -35,7 +37,13 @@ export class PosteditComponent {
   }
   onSubmit(): void {
     if (this.postForm.valid) {
-      console.log(this.postForm.value);
+      const formData = {
+        title: this.postForm.value.post_title,
+        id: this.postForm.value.post_id,
     }
+    this.postservice.postUpdate(this.postForm.value.post_id,formData).subscribe(data=>{
+      console.log(data);
+    });
   }
+}
 }
