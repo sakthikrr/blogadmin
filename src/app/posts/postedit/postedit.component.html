@@ -1,4 +1,5 @@
 <div class="card m-2">
+  <h2>Post Edit</h2>
 <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
   <div class="field grid">
     <label for="post_title" class="col-fixed" style="width:100px">Post Title:</label>
@@ -6,7 +7,9 @@
   </div>
   <div class="field grid">
     <label for="post_content" class="col-fixed" style="width:100px">Post Content:</label>
-    <textarea  rows="4" cols="50" id="post_content" formControlName="post_content" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary"></textarea>
+    <p-editor formControlName="post_content" [style]="{ height: '320px', width: '100%' }" ></p-editor>
+
+   
   </div>
   <input type="hidden" formControlName="post_id">
     <p-button type="submit" label="Submit" />
