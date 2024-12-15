@@ -6,6 +6,9 @@ import { SidebarModule } from 'primeng/sidebar';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { DialogModule } from 'primeng/dialog';
 import { EditorModule } from 'primeng/editor';
+import { TreeModule  } from 'primeng/tree';
+import { ListboxModule } from 'primeng/listbox';
+
 
 @NgModule({
   declarations: [],
@@ -16,7 +19,9 @@ import { EditorModule } from 'primeng/editor';
     SidebarModule,
     PanelMenuModule,
     DialogModule,
-    EditorModule
+    EditorModule,
+    TreeModule,
+    ListboxModule
   ],
   exports: [  // Export ButtonModule to make it available for other modules
     ButtonModule,
@@ -24,7 +29,9 @@ import { EditorModule } from 'primeng/editor';
     SidebarModule,
     PanelMenuModule,
     DialogModule,
-    EditorModule
+    EditorModule,
+    TreeModule,
+    ListboxModule
   ]
 
 })

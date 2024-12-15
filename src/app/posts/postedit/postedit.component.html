@@ -11,6 +11,18 @@
 
    
   </div>
+  <div class="field grid">
+    <label for="post_content" class="col-fixed" style="width:100px">Post Categories:</label>
+    <p-listbox 
+    [options]="cities" 
+    formControlName="selectedCities" 
+    optionLabel="name" 
+    [multiple]="true" 
+    styleClass="w-full">
+  </p-listbox>
+
+    </div>
+
   <input type="hidden" formControlName="post_id">
     <p-button type="submit" label="Submit" />
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
 import {PostList} from './postlist.interface'
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-
+import {Category} from './categorylist.interface'
 @Injectable({
   providedIn: 'root'
 })
@@ -43,4 +43,20 @@ export class PostsService {
     return this.httpcli.put(url, formdata, { headers: headers });
 
   }
+  postCategoryList():Observable<Category[]>{
+      const url = `${this.baseUrl}categories`;
+      return this.httpcli.get<Category[]>(url).pipe(
+        map((categories) =>
+          categories.map((category) => ({
+            id: category.id,
+            name: category.name,
+            slug: category.slug,
+            description: category.description,
+            count: category.count
+          }))
+        )
+      );
+
+  }
+  
 }

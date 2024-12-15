@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from '../posts.service'; // Import your service for interacting with the API
 import { ActivatedRoute } from '@angular/router';
-
+import { Category } from '../categorylist.interface';
 @Component({
   selector: 'app-postedit',
   templateUrl: './postedit.component.html',
@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 export class PosteditComponent {
   postForm: FormGroup;
   postId?:number
+  cities: any[] = [];
+  categories : Category[] = [];
   constructor(private fb: FormBuilder,private route:ActivatedRoute,private postservice:PostsService) {
     this.postForm = this.fb.group({
       post_title: ['', Validators.required],
@@ -19,7 +21,21 @@ export class PosteditComponent {
     });
   }
 
+
   ngOnInit(): void {
+    this.postservice.postCategoryList().subscribe(data=>{
+      this.categories=data
+      console.log(this.categories);
+      this.cities = this.categories.map(
+        category => 
+        (
+          { name: category.name, code: category.slug }
+        )
+      );
+    })
+
+
+ 
     this.postId = Number(this.route.snapshot.paramMap.get('id')) || 0;
 
     this.postservice.getSinglePost(this.postId).subscribe(
