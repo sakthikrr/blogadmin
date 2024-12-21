@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from '../posts.service'; // Import your service for interacting with the API
 import { ActivatedRoute } from '@angular/router';
-import { Category } from '../categorylist.interface';
+import { Category } from '../types/categorylist.interface';
 @Component({
   selector: 'app-postedit',
   templateUrl: './postedit.component.html',

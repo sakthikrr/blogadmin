@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {PostsService} from './../posts.service'
-import { PostList } from '../postlist.interface';
+import { PostList } from '../types/postlist.interface';
 import {FormGroup, FormControl} from '@angular/forms';
 interface POSTS{
     id:number;

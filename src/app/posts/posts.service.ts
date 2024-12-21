@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
-import {PostList} from './postlist.interface'
+import {PostList} from './types/postlist.interface'
 import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import {Category} from './categorylist.interface'
+import {Category} from './types/categorylist.interface'
+import {Status} from './types/wpstatus.interface'
 @Injectable({
   providedIn: 'root'
 })
@@ -57,6 +58,22 @@ export class PostsService {
         )
       );
 
+  }
+
+  postStatusList():Observable<Status[]>{
+    const url = `${this.baseUrl}statuses`;
+    return this.httpcli.get<Status[]>(url).pipe(
+      map((statuses) =>
+        statuses.map((status) => ({
+          name: status.name,
+          public: status.public,
+          protected: status.protected,
+          private: status.private,
+          queryable: status.queryable,
+          slug: status.slug
+        }))
+      )
+    );
   }
   
 }

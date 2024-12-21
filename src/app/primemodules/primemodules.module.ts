@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { EditorModule } from 'primeng/editor';
 import { TreeModule  } from 'primeng/tree';
 import { ListboxModule } from 'primeng/listbox';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { ListboxModule } from 'primeng/listbox';
     DialogModule,
     EditorModule,
     TreeModule,
-    ListboxModule
+    ListboxModule,
+    DropdownModule
+    
   ],
   exports: [  // Export ButtonModule to make it available for other modules
     ButtonModule,
@@ -31,7 +34,9 @@ import { ListboxModule } from 'primeng/listbox';
     DialogModule,
     EditorModule,
     TreeModule,
-    ListboxModule
+    ListboxModule,
+    DropdownModule
+    
   ]
 
 })
