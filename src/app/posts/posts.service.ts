@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
 import {PostList} from './types/postlist.interface'
-import { map, Observable } from 'rxjs';
+import { map, Observable,tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {Category} from './types/categorylist.interface'
 import {Status} from './types/wpstatus.interface'
@@ -62,15 +62,23 @@ export class PostsService {
 
   postStatusList():Observable<Status[]>{
     const url = `${this.baseUrl}statuses`;
-    return this.httpcli.get<Status[]>(url).pipe(
-      map((statuses) =>
-        statuses.map((status) => ({
-          name: status.name,
-          public: status.public,
-          protected: status.protected,
-          private: status.private,
-          queryable: status.queryable,
-          slug: status.slug
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.authHeader
+    });
+    return this.httpcli.get<{ [key: string]: Status }>(url,{ headers: headers }).pipe(
+      tap(
+        statuses => console.log('Fetched statuses:', Object.keys(statuses))
+        
+    ), // Log the statuses
+      map((statuses) => 
+        Object.keys(statuses).map(key => ({
+          name: statuses[key].name,
+          public: statuses[key].public,
+          protected: statuses[key].protected,
+          private: statuses[key].private,
+          queryable: statuses[key].queryable,
+          slug: statuses[key].slug
         }))
       )
     );

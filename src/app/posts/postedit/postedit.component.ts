@@ -12,12 +12,14 @@ export class PosteditComponent {
   postForm: FormGroup;
   postId?:number
   cities: any[] = [];
+  post_status: any[] = []
   categories : Category[] = [];
   constructor(private fb: FormBuilder,private route:ActivatedRoute,private postservice:PostsService) {
     this.postForm = this.fb.group({
       post_title: ['', Validators.required],
       post_content: ['', Validators.required],
-      post_id: ['']
+      post_id: [''],
+      select_status: [''],
     });
   }
 
@@ -25,7 +27,7 @@ export class PosteditComponent {
   ngOnInit(): void {
     this.postservice.postCategoryList().subscribe(data=>{
       this.categories=data
-      console.log(this.categories);
+    
       this.cities = this.categories.map(
         category => 
         (
@@ -34,7 +36,12 @@ export class PosteditComponent {
       );
     })
 
-
+    this.postservice.postStatusList().subscribe(data => {
+      console.log(data);
+     this.post_status = data.map(status => ({ name: status.name, code: status.slug }));
+      console.log("Post Status");
+      console.log(this.post_status);
+    });
  
     this.postId = Number(this.route.snapshot.paramMap.get('id')) || 0;
 

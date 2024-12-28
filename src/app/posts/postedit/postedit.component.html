@@ -25,7 +25,7 @@
 
     <div class="field grid">
       <label for="select_status" class="col-fixed" style="width:100px">Select status:</label>
-      
+      <p-dropdown formControlName="select_status" [options]="post_status" optionLabel="name" styleClass="w-full"></p-dropdown>
       </div>
 
   <input type="hidden" formControlName="post_id">
