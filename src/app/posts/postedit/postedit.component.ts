@@ -65,7 +65,7 @@ export class PosteditComponent {
             post_title: data?.title?.rendered || '',
             post_content:data?.content?.rendered || '',
             post_id:data.id,
-            select_status:this.post_status[2],
+            select_status:sel_stat,
             selectedCategory:selectedCategories
           });
          
