@@ -23,32 +23,36 @@ export class PosteditComponent {
       select_status: [''],
       selectedCategory: ['']
     });
+
+    this.postservice.postStatusList().subscribe(data => {
+      this.post_status = data.map(status => ({ name: status.name, code: status.slug }));
+  });
+  this.postservice.postCategoryList().subscribe(data=>{
+ 
+    this.categories=data
+  
+    this.category_list = this.categories.map(
+      category => 
+      (
+        { name: category.name, code: category.id }
+      )
+    );
+    this.loadPosts();
+  })
   }
 
 
   ngOnInit(): void {
-     this.postservice.postStatusList().subscribe(data => {
-        this.post_status = data.map(status => ({ name: status.name, code: status.slug }));
-    });
-    this.postservice.postCategoryList().subscribe(data=>{
-   
-      this.categories=data
-    
-      this.category_list = this.categories.map(
-        category => 
-        (
-          { name: category.name, code: category.id }
-        )
-      );
-    })
 
 
- 
+  }
+
+  loadPosts(): void {
     this.postId = Number(this.route.snapshot.paramMap.get('id')) || 0;
-
+    console.log("Hai",this.post_status[2])
     this.postservice.getSinglePost(this.postId).subscribe(
       {
-
+        
         next: (data:any) => {
           const selectedCategories = this.category_list.filter(cat =>
             data.categories?.includes(cat.code)
@@ -61,7 +65,7 @@ export class PosteditComponent {
             post_title: data?.title?.rendered || '',
             post_content:data?.content?.rendered || '',
             post_id:data.id,
-            select_status:this.post_status.find(status => status.name === data.status),
+            select_status:this.post_status[2],
             selectedCategory:selectedCategories
           });
          
