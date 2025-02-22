@@ -58,9 +58,6 @@ export class PosteditComponent {
             data.categories?.includes(cat.code)
           );
           const sel_stat = this.post_status.find(status => status.code === data.status)
-          console.log(this.post_status)
-          console.log(data.status)
-          console.log(sel_stat)
           this.postForm.patchValue({
             post_title: data?.title?.rendered || '',
             post_content:data?.content?.rendered || '',
@@ -76,12 +73,15 @@ export class PosteditComponent {
   onSubmit(): void 
     {
           if (this.postForm.valid) {
-            const formData = {
+              const formData = {
                   title: this.postForm.value.post_title,
                   id: this.postForm.value.post_id,
+                  content: this.postForm.value.post_content,
+                  status: this.postForm.value.select_status.code,
+                  categories: this.postForm.value.selectedCategory.map((cat: any) => cat.code)
               }
               this.postservice.postUpdate(this.postForm.value.post_id,formData).subscribe(data=>{
-               
+                   console.log(data);
               });
         }
   }
