@@ -1,5 +1,6 @@
 <div class="card m-2">
   <h2>Post Edit</h2>
+
 <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
   <div class="field grid">
     <label for="post_title" class="col-fixed" style="width:100px">Post Title:</label>
@@ -38,4 +39,5 @@
     <p-button type="submit" label="Submit" />
 
   </form>
+
 </div>

@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PosteditComponent } from './postedit/postedit.component'; // Import this
 
+
 @NgModule({
   declarations: [
     PostlistComponent,

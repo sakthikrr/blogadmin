@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http'; // Import HttpClientMod
 import { LayoutModule } from './layout/layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
-    
+    MessageService  //  Provide MessageService
   ],
   bootstrap: [AppComponent]
 })

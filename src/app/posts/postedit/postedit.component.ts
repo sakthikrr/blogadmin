@@ -4,6 +4,7 @@ import { PostsService } from '../posts.service'; // Import your service for inte
 import { ActivatedRoute } from '@angular/router';
 import { Category } from '../types/categorylist.interface';
 import { Status } from '../types/wpstatus.interface';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-postedit',
   templateUrl: './postedit.component.html',
@@ -15,7 +16,7 @@ export class PosteditComponent {
   category_list: any[] = [];
   post_status: any[] = []
   categories : Category[] = [];
-  constructor(private fb: FormBuilder,private route:ActivatedRoute,private postservice:PostsService) {
+  constructor(private fb: FormBuilder,private route:ActivatedRoute,private postservice:PostsService,private messageService: MessageService) {
     this.postForm = this.fb.group({
       post_title: ['', Validators.required],
       post_content: ['', Validators.required],
@@ -73,16 +74,25 @@ export class PosteditComponent {
   onSubmit(): void 
     {
           if (this.postForm.valid) {
-              const formData = {
-                  title: this.postForm.value.post_title,
-                  id: this.postForm.value.post_id,
-                  content: this.postForm.value.post_content,
-                  status: this.postForm.value.select_status.code,
-                  categories: this.postForm.value.selectedCategory.map((cat: any) => cat.code)
-              }
-              this.postservice.postUpdate(this.postForm.value.post_id,formData).subscribe(data=>{
-                   console.log(data);
-              });
+                const formData = {
+                    title: this.postForm.value.post_title,
+                    id: this.postForm.value.post_id,
+                    content: this.postForm.value.post_content,
+                    status: this.postForm.value.select_status.code,
+                    categories: this.postForm.value.selectedCategory.map((cat: any) => cat.code)
+                }
+                this.postservice.postUpdate(this.postForm.value.post_id,formData).subscribe(data=>{
+                    console.log(data);
+                    this.showSuccess();
+                });
         }
+  }
+
+  showSuccess() {
+    this.messageService.add({
+      severity: 'success',  // Options: 'success', 'info', 'warn', 'error'
+      summary: 'Post Updated',
+      detail: 'Post Updated Successfully'
+    });
   }
 }

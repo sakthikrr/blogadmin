@@ -9,6 +9,9 @@ import { EditorModule } from 'primeng/editor';
 import { TreeModule  } from 'primeng/tree';
 import { ListboxModule } from 'primeng/listbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { ToastModule } from 'primeng/toast';
+
+
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import { DropdownModule } from 'primeng/dropdown';
     EditorModule,
     TreeModule,
     ListboxModule,
-    DropdownModule
+    DropdownModule,
+    ToastModule
     
   ],
   exports: [  // Export ButtonModule to make it available for other modules
@@ -35,8 +39,8 @@ import { DropdownModule } from 'primeng/dropdown';
     EditorModule,
     TreeModule,
     ListboxModule,
-    DropdownModule
-    
+    DropdownModule,
+    ToastModule
   ]
 
 })
