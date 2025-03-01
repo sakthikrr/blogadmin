@@ -61,6 +61,17 @@
     [(visible)]="visible" 
     [style]="{ width: '25rem' }"
     [closable]="true">
+
+    <div *ngIf="showSuccessMessage" class="mb-3">
+        <p-messages severity="success">
+            <ng-template pTemplate="content">
+                <div class="flex align-items-center">
+                    <i class="pi pi-check-circle mr-2"></i>
+                    <span>Post updated successfully!</span>
+                </div>
+            </ng-template>
+        </p-messages>
+    </div>
     
     <form [formGroup]="postquickedit" (ngSubmit)="onSubmit()">
         <div class="field">
@@ -70,6 +81,15 @@
                 type="text" 
                 pInputText 
                 formControlName="post_title"
+                class="w-full">
+        </div>
+        <div class="field">
+            <label for="pslug" class="block mb-2">Post Title:</label>
+            <input 
+                id="pslug" 
+                type="text" 
+                pInputText 
+                formControlName="post_slug"
                 class="w-full">
         </div>
         

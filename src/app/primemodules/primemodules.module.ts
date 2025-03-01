@@ -10,6 +10,8 @@ import { TreeModule  } from 'primeng/tree';
 import { ListboxModule } from 'primeng/listbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 
 
@@ -27,7 +29,9 @@ import { ToastModule } from 'primeng/toast';
     TreeModule,
     ListboxModule,
     DropdownModule,
-    ToastModule
+    ToastModule,
+    MessageModule,
+    MessagesModule
     
   ],
   exports: [  // Export ButtonModule to make it available for other modules
@@ -40,7 +44,9 @@ import { ToastModule } from 'primeng/toast';
     TreeModule,
     ListboxModule,
     DropdownModule,
-    ToastModule
+    ToastModule,
+    MessageModule,
+    MessagesModule
   ]
 
 })

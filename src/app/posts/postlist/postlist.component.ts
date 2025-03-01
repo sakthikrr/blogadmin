@@ -16,10 +16,13 @@ export class PostlistComponent {
 PostListdata:POSTS[]=[];
 PostsList:PostList[]=[]
 postquickedit: FormGroup;
+showSuccessMessage: boolean = false;
+
 
  constructor(private postser:PostsService){
     this.postquickedit = new FormGroup({
       post_title: new FormControl(''),
+      post_slug: new FormControl(''),
       post_id:new FormControl('')
       });
  }
@@ -41,12 +44,14 @@ postquickedit: FormGroup;
   visible: boolean = false;
 
     showDialog(id:number) {
-        
+      this.showSuccessMessage = false; // Reset success message state when opening dialog
+
          this.postser.getSinglePost(id).subscribe(
           {
             next: (data) => {
               this.postquickedit.patchValue({
                 post_title: data?.title?.rendered || '',
+                post_slug: data?.slug || '',
                 post_id:data.id
               });
               this.visible = true;
@@ -62,10 +67,18 @@ postquickedit: FormGroup;
       
       const formData = {
         id: this.postquickedit.value.post_id,
-        title: this.postquickedit.value.post_title
+        title: this.postquickedit.value.post_title,
+        slug: this.postquickedit.value.post_slug
       };
-      this.postser.postQuickUpdate(this.postquickedit.value.post_id,formData).subscribe(data=>{
-        console.log(data);
-      })
+      this.postser.postQuickUpdate(this.postquickedit.value.post_id, formData).subscribe({
+        next: (data) => {
+          console.log(data);
+          // Show success message inside dialog
+          this.showSuccessMessage = true;
+        },
+        error: (error) => {
+          console.error('Failed to update the post:', error);
+        }
+      });
     }
 }
