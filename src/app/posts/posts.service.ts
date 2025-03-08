@@ -91,5 +91,19 @@ export class PostsService {
     getMediaById(id: number): Observable<any> {
       return this.httpcli.get(`${this.baseUrl}/media/${id}`);
     }
+
+    // Upload media file to WordPress
+  uploadMedia(file: File): Observable<any> {
+    const url = `${this.baseUrl}media`;
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    const headers = new HttpHeaders({
+      'Authorization': this.authHeader
+      // Note: Don't set Content-Type as browser will set it with correct boundary for multipart/form-data
+    });
+    
+    return this.httpcli.post(url, formData, { headers: headers });
+  }
   
 }

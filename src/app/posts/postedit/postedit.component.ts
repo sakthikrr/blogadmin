@@ -17,6 +17,9 @@ export class PosteditComponent {
   post_status: any[] = []
   categories : Category[] = [];
   featureImageUrl: string = '';
+  uploadedFiles: any[] = [];
+  uploadInProgress: boolean = false;
+  featureImageId: number = 0;
   constructor(private fb: FormBuilder,private route:ActivatedRoute,private postservice:PostsService,private messageService: MessageService) {
     this.postForm = this.fb.group({
       post_title: ['', Validators.required],
@@ -87,7 +90,8 @@ export class PosteditComponent {
                     id: this.postForm.value.post_id,
                     content: this.postForm.value.post_content,
                     status: this.postForm.value.select_status.code,
-                    categories: this.postForm.value.selectedCategory.map((cat: any) => cat.code)
+                    categories: this.postForm.value.selectedCategory.map((cat: any) => cat.code),
+                    featured_media: this.featureImageId || 0
                 }
                 this.postservice.postUpdate(this.postForm.value.post_id,formData).subscribe(data=>{
                     console.log(data);
@@ -95,6 +99,58 @@ export class PosteditComponent {
                 });
         }
   }
+
+  onFileSelect(event: any): void {
+    this.uploadedFiles = [];
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+    
+    if (this.uploadedFiles.length > 0) {
+      this.uploadImage();
+    }
+  }
+  
+  uploadImage(): void {
+    if (this.uploadedFiles.length === 0) return;
+    
+    this.uploadInProgress = true;
+    const fileToUpload = this.uploadedFiles[0];
+    
+    this.postservice.uploadMedia(fileToUpload).subscribe({
+      next: (response: any) => {
+        this.featureImageId = response.id;
+        this.featureImageUrl = response.source_url;
+        this.postForm.patchValue({
+          feature_image_id: response.id
+        });
+        this.uploadInProgress = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Image Uploaded',
+          detail: 'Feature image uploaded successfully'
+        });
+      },
+      error: (error) => {
+        console.error('Upload error:', error);
+        this.uploadInProgress = false;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Upload Failed',
+          detail: 'Failed to upload image'
+        });
+      }
+    });
+  }
+  
+  removeImage(): void {
+    this.featureImageUrl = '';
+    this.featureImageId = 0;
+    this.postForm.patchValue({
+      feature_image_id: ''
+    });
+  }
+
 
   showSuccess() {
     this.messageService.add({

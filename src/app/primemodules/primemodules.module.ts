@@ -12,8 +12,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-import { FileUploadModule } from 'primeng/fileupload';
 
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 
 
@@ -33,7 +34,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     ToastModule,
     MessageModule,
     MessagesModule,
-    FileUploadModule
+    FileUploadModule,
+    ProgressBarModule
     
   ],
   exports: [  // Export ButtonModule to make it available for other modules
@@ -49,7 +51,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     ToastModule,
     MessageModule,
     MessagesModule,
-    FileUploadModule
+    FileUploadModule,
+    ProgressBarModule
   ]
 
 })
