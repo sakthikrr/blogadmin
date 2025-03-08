@@ -16,13 +16,15 @@ export class PosteditComponent {
   category_list: any[] = [];
   post_status: any[] = []
   categories : Category[] = [];
+  featureImageUrl: string = '';
   constructor(private fb: FormBuilder,private route:ActivatedRoute,private postservice:PostsService,private messageService: MessageService) {
     this.postForm = this.fb.group({
       post_title: ['', Validators.required],
       post_content: ['', Validators.required],
       post_id: [''],
       select_status: [''],
-      selectedCategory: ['']
+      selectedCategory: [''],
+      feature_image_id: [''] // Add this control for the image ID
     });
 
     this.postservice.postStatusList().subscribe(data => {
@@ -50,7 +52,7 @@ export class PosteditComponent {
 
   loadPosts(): void {
     this.postId = Number(this.route.snapshot.paramMap.get('id')) || 0;
-    console.log("Hai",this.post_status[2])
+    let feature_image_url = 0;
     this.postservice.getSinglePost(this.postId).subscribe(
       {
         
@@ -58,6 +60,11 @@ export class PosteditComponent {
           const selectedCategories = this.category_list.filter(cat =>
             data.categories?.includes(cat.code)
           );
+
+          this.postservice.getPostFeatureImage(data.featured_media).subscribe((data:any)=>{
+            console.log(data.link)
+            this.featureImageUrl = data.link;
+          })
           const sel_stat = this.post_status.find(status => status.code === data.status)
           this.postForm.patchValue({
             post_title: data?.title?.rendered || '',
@@ -65,6 +72,7 @@ export class PosteditComponent {
             post_id:data.id,
             select_status:sel_stat,
             selectedCategory:selectedCategories
+            
           });
          
         }

@@ -23,6 +23,18 @@
   </p-listbox>
 
     </div>
+           <!-- Image preview - show if editing a post with existing image -->
+           <div *ngIf="featureImageUrl" class="mb-3">
+            <img [src]="featureImageUrl" alt="Feature image" class="max-w-full border-round" style="max-height: 200px;">
+            <button 
+              pButton 
+              type="button" 
+              icon="pi pi-trash" 
+              class="p-button-rounded p-button-danger p-button-sm ml-2" 
+             
+              pTooltip="Remove image">
+            </button>
+          </div>
 
     <div class="field grid">
       <label for="select_status" class="col-fixed" style="width:100px">Select status:</label>

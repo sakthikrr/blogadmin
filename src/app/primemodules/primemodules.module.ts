@@ -12,6 +12,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 
@@ -31,7 +32,8 @@ import { MessageModule } from 'primeng/message';
     DropdownModule,
     ToastModule,
     MessageModule,
-    MessagesModule
+    MessagesModule,
+    FileUploadModule
     
   ],
   exports: [  // Export ButtonModule to make it available for other modules
@@ -46,7 +48,8 @@ import { MessageModule } from 'primeng/message';
     DropdownModule,
     ToastModule,
     MessageModule,
-    MessagesModule
+    MessagesModule,
+    FileUploadModule
   ]
 
 })

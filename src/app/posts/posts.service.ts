@@ -33,6 +33,10 @@ export class PostsService {
     return this.httpcli.put(url, formdata, { headers: headers });
 
   }
+  getPostFeatureImage(postid:number):Observable<any>{
+    const url = `${this.baseUrl}media/${postid}`;
+    return this.httpcli.get(url);
+  }
 
   postUpdate(id:number,formdata:{ id: number,title: string}){
     const url = `${this.baseUrl}posts/${id}`;
@@ -83,5 +87,9 @@ export class PostsService {
       )
     );
   }
+    // Get media by ID
+    getMediaById(id: number): Observable<any> {
+      return this.httpcli.get(`${this.baseUrl}/media/${id}`);
+    }
   
 }
