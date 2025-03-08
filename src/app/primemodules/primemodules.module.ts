@@ -15,7 +15,7 @@ import { MessageModule } from 'primeng/message';
 
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
-
+import { PanelModule } from 'primeng/panel';
 
 
 @NgModule({
@@ -35,7 +35,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
     MessageModule,
     MessagesModule,
     FileUploadModule,
-    ProgressBarModule
+    ProgressBarModule,
+    PanelModule
     
   ],
   exports: [  // Export ButtonModule to make it available for other modules
@@ -52,7 +53,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
     MessageModule,
     MessagesModule,
     FileUploadModule,
-    ProgressBarModule
+    ProgressBarModule,
+    PanelModule
   ]
 
 })
