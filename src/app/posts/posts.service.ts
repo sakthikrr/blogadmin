@@ -16,11 +16,20 @@ export class PostsService {
   constructor(private httpcli :HttpClient) {}
 
   getPosts(): Observable<PostList[]> {
-      const postslist =  this.httpcli.get<PostList[]>(`${this.baseUrl}posts`);
+    
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.authHeader
+    });
+      const postslist =  this.httpcli.get<PostList[]>(`${this.baseUrl}posts?status=any`, { headers: headers });
       return postslist;
   }
   getSinglePost(id:number):Observable<PostList>{
-      const post = this.httpcli.get<PostList>(`${this.baseUrl}posts/${id}`)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.authHeader
+    });
+      const post = this.httpcli.get<PostList>(`${this.baseUrl}posts/${id}`, { headers: headers });
       return post;
   }
   postQuickUpdate(id:number,formdata:{ id: number,title: string}){
