@@ -15,13 +15,13 @@ export class PostsService {
   private authHeader = 'Basic ' + btoa(this.username + ':' + this.appPassword);
   constructor(private httpcli :HttpClient) {}
 
-  getPosts(): Observable<PostList[]> {
+  getPosts(poststatus:string='any'): Observable<PostList[]> {
     
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.authHeader
     });
-      const postslist =  this.httpcli.get<PostList[]>(`${this.baseUrl}posts?status=any`, { headers: headers });
+      const postslist =  this.httpcli.get<PostList[]>(`${this.baseUrl}posts?status=${poststatus}`, { headers: headers });
       return postslist;
   }
   getSinglePost(id:number):Observable<PostList>{

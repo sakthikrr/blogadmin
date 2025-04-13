@@ -27,7 +27,7 @@ showSuccessMessage: boolean = false;
       });
  }
   ngOnInit(): void {
-    this.postser.getPosts().subscribe((data)=>{
+    this.postser.getPosts('any').subscribe((data)=>{
         this.PostsList = data;
         this.createIdSlugArray()
 
@@ -80,5 +80,13 @@ showSuccessMessage: boolean = false;
           console.error('Failed to update the post:', error);
         }
       });
+    }
+    poststatus(status:string):void{
+      console.log(status);
+      this.postser.getPosts(status).subscribe((data)=>{
+        this.PostsList = data;
+        this.createIdSlugArray()
+
+    })
     }
 }
