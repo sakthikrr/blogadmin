@@ -37,6 +37,17 @@
     styleClass="p-button-outlined p-button-sm m-3">
   
 </button>
+    <button 
+    pButton 
+    pRipple 
+    type="button" 
+    label="Trash"
+    icon="pi pi-list" 
+    class="p-button-outlined p-button-sm ml-3"
+    (click)="poststatus('trash')"
+    styleClass="p-button-outlined p-button-sm m-3">
+  
+</button>
 
     </div>
     <ng-container *ngIf="isLoading; else tableContent">
