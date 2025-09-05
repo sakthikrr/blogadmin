@@ -17,6 +17,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { PanelModule } from 'primeng/panel';
 import { SkeletonModule } from 'primeng/skeleton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SkeletonModule } from 'primeng/skeleton';
     FileUploadModule,
     ProgressBarModule,
   PanelModule,
-  SkeletonModule
+  SkeletonModule,
+  ProgressSpinnerModule
     
   ],
   exports: [  // Export ButtonModule to make it available for other modules
@@ -57,7 +59,8 @@ import { SkeletonModule } from 'primeng/skeleton';
     FileUploadModule,
     ProgressBarModule,
   PanelModule,
-  SkeletonModule
+  SkeletonModule,
+  ProgressSpinnerModule
   ]
 
 })
