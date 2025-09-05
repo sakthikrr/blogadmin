@@ -13,10 +13,11 @@ interface POSTS{
   styleUrl: './postlist.component.css'
 })
 export class PostlistComponent {
-PostListdata:POSTS[]=[];
-PostsList:PostList[]=[]
-postquickedit: FormGroup;
-showSuccessMessage: boolean = false;
+  PostListdata:POSTS[]=[];
+  PostsList:PostList[]=[]
+  postquickedit: FormGroup;
+  showSuccessMessage: boolean = false;
+  isLoading: boolean = true;
 
 
  constructor(private postser:PostsService){
@@ -27,12 +28,13 @@ showSuccessMessage: boolean = false;
       });
  }
   ngOnInit(): void {
+    this.isLoading = true;
     this.postser.getPosts('any').subscribe((data)=>{
         this.PostsList = data;
-        this.createIdSlugArray()
-
-    })
-  }  
+        this.createIdSlugArray();
+        this.isLoading = false;
+    });
+  }
  createIdSlugArray(): void {
     this.PostListdata = this.PostsList.map(post => ({
       id: post.id,
@@ -83,10 +85,11 @@ showSuccessMessage: boolean = false;
     }
     poststatus(status:string):void{
       console.log(status);
+      this.isLoading = true;
       this.postser.getPosts(status).subscribe((data)=>{
         this.PostsList = data;
-        this.createIdSlugArray()
-
-    })
+        this.createIdSlugArray();
+        this.isLoading = false;
+      });
     }
 }

@@ -39,59 +39,68 @@
 </button>
 
     </div>
-    <p-table 
-        [value]="PostListdata" 
-        [tableStyle]="{ 'min-width': '50rem' }"
-        styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
-        [paginator]="true" 
-        [rows]="10"
-        [showCurrentPageReport]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [rowsPerPageOptions]="[10,25,50]"
-        responsiveLayout="scroll">
-        
-        <ng-template pTemplate="header">
-            <tr class="flex w-full">
-                <th class="flex-shrink-0 w-2 text-left">ID</th>
-                <th class="flex-grow-1 w-5 text-left">Title</th>
-                <th class="flex-grow-1 w-4 text-left">Slug</th>
-                <th class="flex-shrink-0 w-2 text-center">Actions</th>
-            </tr>
-        </ng-template>
-        
-        <ng-template pTemplate="body" let-product>
-            <tr class="flex w-full">
-                <td class="flex-shrink-0 w-2">{{ product.id }}</td>
-                <td class="flex-grow-1 w-5">{{ product.title }}</td>
-                <td class="flex-grow-1 w-4">{{ product.slug }}</td>
-                <td class="flex-shrink-0 w-2">
-                    <div class="flex gap-2 justify-content-center">
-                        <button 
-                            pButton 
-                            pRipple 
-                            type="button" 
-                            icon="pi pi-file-edit" 
-                            (click)="showDialog(product.id)"
-                            class="p-button-rounded p-button-text"
-                            pTooltip="Quick Edit"
-                            tooltipPosition="top">
-                        </button>
-                        
-                        <button 
-                            pButton 
-                            pRipple 
-                            type="button" 
-                            icon="pi pi-pencil" 
-                            [routerLink]="['edit-post', product.id]"
-                            class="p-button-rounded p-button-text"
-                            pTooltip="Full Edit"
-                            tooltipPosition="top">
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
+    <ng-container *ngIf="isLoading; else tableContent">
+      <div class="p-3">
+        <div *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" class="flex w-full mb-2">
+          <p-skeleton width="3rem" class="flex-shrink-0 w-2 mr-2"></p-skeleton>
+          <p-skeleton width="12rem" class="flex-grow-1 w-5 mr-2"></p-skeleton>
+          <p-skeleton width="8rem" class="flex-grow-1 w-4 mr-2"></p-skeleton>
+          <p-skeleton width="6rem" class="flex-shrink-0 w-2"></p-skeleton>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #tableContent>
+      <p-table 
+          [value]="PostListdata" 
+          [tableStyle]="{ 'min-width': '50rem' }"
+          styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+          [paginator]="true" 
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[10,25,50]"
+          responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+              <tr class="flex w-full">
+                  <th class="flex-shrink-0 w-2 text-left">ID</th>
+                  <th class="flex-grow-1 w-5 text-left">Title</th>
+                  <th class="flex-grow-1 w-4 text-left">Slug</th>
+                  <th class="flex-shrink-0 w-2 text-center">Actions</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+              <tr class="flex w-full">
+                  <td class="flex-shrink-0 w-2">{{ product.id }}</td>
+                  <td class="flex-grow-1 w-5">{{ product.title }}</td>
+                  <td class="flex-grow-1 w-4">{{ product.slug }}</td>
+                  <td class="flex-shrink-0 w-2">
+                      <div class="flex gap-2 justify-content-center">
+                          <button 
+                              pButton 
+                              pRipple 
+                              type="button" 
+                              icon="pi pi-file-edit" 
+                              (click)="showDialog(product.id)"
+                              class="p-button-rounded p-button-text"
+                              pTooltip="Quick Edit"
+                              tooltipPosition="top">
+                          </button>
+                          <button 
+                              pButton 
+                              pRipple 
+                              type="button" 
+                              icon="pi pi-pencil" 
+                              [routerLink]="['edit-post', product.id]"
+                              class="p-button-rounded p-button-text"
+                              pTooltip="Full Edit"
+                              tooltipPosition="top">
+                          </button>
+                      </div>
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
+    </ng-template>
 </div>
 
 
