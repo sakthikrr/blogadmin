@@ -5,6 +5,7 @@ import { map, Observable,tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {Category} from './types/categorylist.interface'
 import {Status} from './types/wpstatus.interface'
+import {Tag} from './types/taglist.interface'
 @Injectable({
   providedIn: 'root'
 })
@@ -115,4 +116,34 @@ export class PostsService {
     return this.httpcli.post(url, formData, { headers: headers });
   }
   
+  // Get tags list
+  getTagsList(): Observable<Tag[]> {
+    const url = `${this.baseUrl}tags`;
+    return this.httpcli.get<Tag[]>(url).pipe(
+      map((tags) =>
+        tags.map((tag) => ({
+          id: tag.id,
+          name: tag.name,
+          slug: tag.slug,
+          description: tag.description,
+          count: tag.count
+        }))
+      )
+    );
+  }
+
+  // Create a new tag
+  createTag(tagName: string): Observable<Tag> {
+    const url = `${this.baseUrl}tags`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.authHeader
+    });
+    
+    console.log('Creating tag with name:', tagName);
+    
+    return this.httpcli.post<Tag>(url, { name: tagName }, { headers: headers }).pipe(
+      tap(response => console.log('Tag creation response:', response))
+    );
+  }
 }

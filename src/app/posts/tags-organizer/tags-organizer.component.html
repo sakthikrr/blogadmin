@@ -1,0 +1,59 @@
+<div class="tags-organizer">
+    <div class="p-fluid">
+        <div *ngIf="loading" class="tag-loading">
+            <p-progressSpinner [style]="{width: '25px', height: '25px'}" 
+                               styleClass="custom-spinner" 
+                               strokeWidth="4"></p-progressSpinner>
+            <span>Loading tags...</span>
+        </div>
+        
+        <!-- Selected Tags -->
+        <div *ngIf="selectedTags.length > 0" class="selected-tags mb-2">
+            <p-chip *ngFor="let tag of selectedTags" 
+                   [label]="tag.name" 
+                   [removable]="true" 
+                   (onRemove)="onRemoveTag(tag)"
+                   styleClass="tag-chip"></p-chip>
+        </div>
+        
+        <!-- Tag Input with AutoComplete -->
+        <div class="tag-input-wrapper">
+            <p-autoComplete 
+                [formControl]="tagInputControl"
+                [suggestions]="filteredTags" 
+                (completeMethod)="filterTags($event)"
+                field="name"
+                [dropdown]="true"
+                    (onSelect)="onSelectTag($event)"
+                    [forceSelection]="false"
+                    [showClear]="true"
+                (keydown.enter)="onEnterPress($event)"
+                placeholder="Search or create tags..."
+                [style]="{'width':'100%'}"
+                styleClass="tag-autocomplete">
+                <ng-template let-tag pTemplate="item">
+                    <div *ngIf="tag.id === 'new'" class="create-tag-item">
+                        <i class="pi pi-plus"></i>
+                        <span>{{ tag.name }}</span>
+                    </div>
+                    <div *ngIf="tag.id !== 'new'" class="existing-tag-item">
+                        <span>{{ tag.name }}</span>
+                        <span *ngIf="tag.count > 0" class="tag-count">({{ tag.count }})</span>
+                    </div>
+                </ng-template>
+            </p-autoComplete>
+            
+            <p-button 
+                icon="pi pi-plus" 
+                (click)="addTagFromInput()" 
+                [disabled]="!tagInputControl.value || tagInputControl.value.trim() === ''"
+                styleClass="p-button-sm p-button-outlined ml-2"
+                pTooltip="Add/Create tag">
+            </p-button>
+        </div>
+        
+        <small *ngIf="!loading" class="block text-sm text-600 mt-1">
+            Type to search for existing tags or create new ones
+        </small>
+    </div>
+</div>

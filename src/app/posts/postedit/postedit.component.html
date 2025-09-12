@@ -39,6 +39,15 @@
           styleClass="w-full">
         </p-listbox>
       </div>
+      
+      <!-- Post Tags -->
+      <div class="col-12 md:col-6 mb-3">
+        <label for="post_tags" class="block font-semibold mb-2">Tags</label>
+        <app-tags-organizer 
+          [selectedTagIds]="selectedTagIds" 
+          (tagsChange)="onTagsChange($event)">
+        </app-tags-organizer>
+      </div>
 
       <!-- Feature Image -->
       <div class="col-12 md:col-6 mb-3">

@@ -4,6 +4,7 @@ import { PostsService } from '../posts.service'; // Import your service for inte
 import { ActivatedRoute } from '@angular/router';
 import { Category } from '../types/categorylist.interface';
 import { Status } from '../types/wpstatus.interface';
+import { Tag } from '../types/taglist.interface';
 import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-postedit',
@@ -16,11 +17,15 @@ export class PosteditComponent {
   category_list: any[] = [];
   post_status: any[] = []
   categories : Category[] = [];
+  tag_list: any[] = [];
+  tags: Tag[] = [];
+  selectedTagIds: number[] = [];
   featureImageUrl: string = '';
   uploadedFiles: any[] = [];
   uploadInProgress: boolean = false;
   featureImageId: number = 0;
   isLoading: boolean = true;
+  newTagName: string = '';
   constructor(private fb: FormBuilder,private route:ActivatedRoute,private postservice:PostsService,private messageService: MessageService) {
     this.postForm = this.fb.group({
       post_title: ['', Validators.required],
@@ -28,23 +33,29 @@ export class PosteditComponent {
       post_id: [''],
       select_status: [''],
       selectedCategory: [''],
+      selectedTags: [''],
       feature_image_id: [''] // Add this control for the image ID
     });
 
     this.postservice.postStatusList().subscribe(data => {
       this.post_status = data.map(status => ({ name: status.name, code: status.slug }));
   });
-  this.postservice.postCategoryList().subscribe(data=>{
- 
-    this.categories=data
-  
+  this.postservice.postCategoryList().subscribe(data => {
+    this.categories = data;
     this.category_list = this.categories.map(
-      category => 
-      (
+      category => (
         { name: category.name, code: category.id }
       )
     );
-    this.loadPosts();
+    
+    // Load tags
+    this.postservice.getTagsList().subscribe(tagsData => {
+      this.tags = tagsData;
+      this.tag_list = this.tags.map(tag => (
+        { name: tag.name, code: tag.id }
+      ));
+      this.loadPosts();
+    });
   })
   }
 
@@ -63,6 +74,15 @@ export class PosteditComponent {
         const selectedCategories = this.category_list.filter(cat =>
           data.categories?.includes(cat.code)
         );
+        
+        // Get selected tags
+        const selectedTags = this.tag_list.filter(tag =>
+          data.tags?.includes(tag.code)
+        );
+        
+        // Set selected tag IDs for the tags organizer component
+        this.selectedTagIds = data.tags || [];
+        
         this.postservice.getPostFeatureImage(data.featured_media).subscribe((data:any)=>{
           this.featureImageUrl = data.link;
         });
@@ -72,7 +92,8 @@ export class PosteditComponent {
           post_content:data?.content?.rendered || '',
           post_id:data.id,
           select_status:sel_stat,
-          selectedCategory:selectedCategories
+          selectedCategory:selectedCategories,
+          selectedTags: selectedTags
         });
         this.isLoading = false;
       },
@@ -90,13 +111,26 @@ export class PosteditComponent {
                     content: this.postForm.value.post_content,
                     status: this.postForm.value.select_status.code,
                     categories: this.postForm.value.selectedCategory.map((cat: any) => cat.code),
+                    tags: this.selectedTagIds, // Use the updated selectedTagIds directly
                     featured_media: this.featureImageId || 0
                 }
+                
+                console.log('Submitting tags:', this.selectedTagIds);
+                
                 this.postservice.postUpdate(this.postForm.value.post_id,formData).subscribe(data=>{
                     console.log(data);
                     this.showSuccess();
                 });
         }
+  }
+  
+  // Method to handle tag changes from the TagsOrganizer component
+  onTagsChange(tagIds: number[]): void {
+    console.log('Tags changed in parent component:', tagIds);
+    this.selectedTagIds = tagIds;
+    
+    // We don't need to update the form value anymore, as we're using selectedTagIds directly
+    // in the onSubmit method
   }
 
   onFileSelect(event: any): void {

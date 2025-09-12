@@ -12,6 +12,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { ChipsModule } from 'primeng/chips';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ChipModule } from 'primeng/chip';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -38,9 +42,13 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MessagesModule,
     FileUploadModule,
     ProgressBarModule,
-  PanelModule,
-  SkeletonModule,
-  ProgressSpinnerModule
+    PanelModule,
+    SkeletonModule,
+    ProgressSpinnerModule,
+    ChipsModule,
+    AutoCompleteModule,
+    ChipModule,
+    TooltipModule
     
   ],
   exports: [  // Export ButtonModule to make it available for other modules
@@ -58,9 +66,13 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MessagesModule,
     FileUploadModule,
     ProgressBarModule,
-  PanelModule,
-  SkeletonModule,
-  ProgressSpinnerModule
+    PanelModule,
+    SkeletonModule,
+    ProgressSpinnerModule,
+    ChipsModule,
+    AutoCompleteModule,
+    ChipModule,
+    TooltipModule
   ]
 
 })
