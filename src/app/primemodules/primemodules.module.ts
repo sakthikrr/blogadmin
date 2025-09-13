@@ -22,6 +22,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { PanelModule } from 'primeng/panel';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CalendarModule } from 'primeng/calendar';
+
 
 
 @NgModule({
@@ -48,8 +50,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ChipsModule,
     AutoCompleteModule,
     ChipModule,
-    TooltipModule
-    
+    TooltipModule,
+    CalendarModule
   ],
   exports: [  // Export ButtonModule to make it available for other modules
     ButtonModule,
@@ -72,7 +74,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ChipsModule,
     AutoCompleteModule,
     ChipModule,
-    TooltipModule
+    TooltipModule,
+    CalendarModule
   ]
 
 })

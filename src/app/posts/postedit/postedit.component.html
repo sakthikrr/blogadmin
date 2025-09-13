@@ -27,6 +27,24 @@
           class="w-full">
         </p-dropdown>
       </div>
+      
+  <!-- Publish Date & Time -->
+      <div class="col-12 md:col-6 mb-3">
+        <label for="publish_date" class="block font-semibold mb-2">Publish Date & Time</label>
+        <p-calendar
+          id="publish_date"
+          formControlName="publish_date"
+          [showTime]="true"
+          hourFormat="24"
+          [showIcon]="true"
+          [showButtonBar]="true"
+          dateFormat="yy-mm-dd"
+          class="w-full">
+        </p-calendar>
+        <small class="text-600 block mt-1">
+          Leave empty to publish immediately. Set future date/time to schedule.
+        </small>
+      </div>
 
       <!-- Post Categories -->
       <div class="col-12 md:col-6 mb-3">
