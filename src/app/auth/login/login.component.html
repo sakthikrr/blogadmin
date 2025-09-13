@@ -8,10 +8,10 @@
     </div>
 
     <div class="mb-3">
-      <label class="block mb-1" for="appPassword">Application Password</label>
+      <label class="block mb-1" for="appPassword">Password</label>
       <input id="appPassword" type="password" pInputText formControlName="appPassword" class="w-full" />
   <small class="p-error" *ngIf="loginForm.controls['appPassword'].touched && loginForm.controls['appPassword'].invalid">Password required</small>
-      <small class="block mt-1 text-600">Use your WordPress Application Password (will be stored locally).</small>
+     
     </div>
 
     <div *ngIf="error" class="p-error mb-2">{{ error }}</div>
