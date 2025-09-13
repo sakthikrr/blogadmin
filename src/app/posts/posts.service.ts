@@ -10,37 +10,37 @@ import {Tag} from './types/taglist.interface'
   providedIn: 'root'
 })
 export class PostsService {
-  private baseUrl = environment.apiUrl;
-  private username = "od5bp";
-  private appPassword ="wxNQ vGTr HET4 W61D 2z0L zV0Z";
-  private authHeader = 'Basic ' + btoa(this.username + ':' + this.appPassword);
+   private baseUrl = environment.apiUrl;
+  // private username = "od5bp";
+  // private appPassword ="wxNQ vGTr HET4 W61D 2z0L zV0Z";
+  // private authHeader = 'Basic ' + btoa(this.username + ':' + this.appPassword);
   constructor(private httpcli :HttpClient) {}
 
   getPosts(poststatus:string='any'): Observable<PostList[]> {
     
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.authHeader
-    });
-      const postslist =  this.httpcli.get<PostList[]>(`${this.baseUrl}posts?status=${poststatus}`, { headers: headers });
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': this.authHeader
+    // });
+      const postslist =  this.httpcli.get<PostList[]>(`${this.baseUrl}posts?status=${poststatus}`);
       return postslist;
   }
   getSinglePost(id:number):Observable<PostList>{
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.authHeader
-    });
-      const post = this.httpcli.get<PostList>(`${this.baseUrl}posts/${id}`, { headers: headers });
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': this.authHeader
+    // });
+      const post = this.httpcli.get<PostList>(`${this.baseUrl}posts/${id}`);
       return post;
   }
   postQuickUpdate(id:number,formdata:{ id: number,title: string}){
     const url = `${this.baseUrl}posts/${id}`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.authHeader
-    });
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': this.authHeader
+    // });
 
-    return this.httpcli.put(url, formdata, { headers: headers });
+    return this.httpcli.put(url, formdata);
 
   }
   getPostFeatureImage(postid:number):Observable<any>{
@@ -50,12 +50,12 @@ export class PostsService {
 
   postUpdate(id:number,formdata:{ id: number,title: string}){
     const url = `${this.baseUrl}posts/${id}`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.authHeader
-    });
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': this.authHeader
+    // });
 
-    return this.httpcli.put(url, formdata, { headers: headers });
+    return this.httpcli.put(url, formdata);
 
   }
   postCategoryList():Observable<Category[]>{
@@ -76,11 +76,11 @@ export class PostsService {
 
   postStatusList():Observable<Status[]>{
     const url = `${this.baseUrl}statuses`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.authHeader
-    });
-    return this.httpcli.get<{ [key: string]: Status }>(url,{ headers: headers }).pipe(
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': this.authHeader
+    // });
+    return this.httpcli.get<{ [key: string]: Status }>(url).pipe(
       tap(
         statuses => console.log('Fetched statuses:', Object.keys(statuses))
         
@@ -108,12 +108,12 @@ export class PostsService {
     const formData = new FormData();
     formData.append('file', file);
     
-    const headers = new HttpHeaders({
-      'Authorization': this.authHeader
-      // Note: Don't set Content-Type as browser will set it with correct boundary for multipart/form-data
-    });
+    // const headers = new HttpHeaders({
+    //   'Authorization': this.authHeader
+      
+    // });
     
-    return this.httpcli.post(url, formData, { headers: headers });
+    return this.httpcli.post(url, formData);
   }
   
   // Get tags list
@@ -135,14 +135,14 @@ export class PostsService {
   // Create a new tag
   createTag(tagName: string): Observable<Tag> {
     const url = `${this.baseUrl}tags`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.authHeader
-    });
+      // const headers = new HttpHeaders({
+      //   'Content-Type': 'application/json',
+      //   'Authorization': this.authHeader
+      // });
     
     console.log('Creating tag with name:', tagName);
-    
-    return this.httpcli.post<Tag>(url, { name: tagName }, { headers: headers }).pipe(
+
+    return this.httpcli.post<Tag>(url, { name: tagName }).pipe(
       tap(response => console.log('Tag creation response:', response))
     );
   }
