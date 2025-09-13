@@ -4,6 +4,9 @@
         <!-- <p-button  icon="pi pi-arrow-right"></p-button> -->
       </div>
       
-       <div class="top-menu flex align-content-center justify-content-between flex-wrap"><i class="pi pi-user" style="font-size: 1.5rem"></i></div>
+       <div class="top-menu flex align-content-center justify-content-between flex-wrap gap-3">
+         <i class="pi pi-user" style="font-size: 1.5rem"></i>
+         <button *ngIf="showLogout" pButton type="button" label="Logout" (click)="logout()" class="p-button-sm p-button-outlined"></button>
+       </div>
     </div>
 </header>

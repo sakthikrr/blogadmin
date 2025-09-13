@@ -10,11 +10,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { BasicAuthInterceptor } from './auth/basic-auth.interceptor';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+  WelcomeComponent,
+  LoginComponent
   ],
   imports: [
     BrowserModule,

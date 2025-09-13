@@ -1,18 +1,17 @@
 <app-header></app-header>
 
 <div class="flex flex-row min-h-screen">
-    <!-- Sidebar with fixed 25% width -->
-    <div class="sidebar" style="flex: 0 0 20%; max-width: 20%; background-color: #f4f4f4;">
-      <app-sidebar></app-sidebar>
+  <!-- Sidebar -->
+  <div *ngIf="showSidebar" class="sidebar" style="flex: 0 0 20%; max-width: 20%; background-color: #f4f4f4;">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <!-- Main container expands full width if no sidebar -->
+  <div class="main-container flex flex-column" [ngStyle]="{flex: 1, backgroundColor: '#ffffff'}">
+    <div class="content-area" style="flex: 1; padding: 16px; max-width: 1000px; margin: 0 auto;">
+      <p-toast></p-toast>
+      <router-outlet></router-outlet>
     </div>
-  
-    <!-- Main container with 75% width -->
-    <div class="main-container flex flex-column" style="flex: 1; background-color: #ffffff;">
-    
-      <div class="content-area" style="flex: 1; padding: 16px;">
-       <p-toast></p-toast>
-        <router-outlet></router-outlet>
-      </div>
-      <!-- <app-footer></app-footer> -->
-    </div>
-  </div> 
+    <!-- <app-footer></app-footer> -->
+  </div>
+</div>
