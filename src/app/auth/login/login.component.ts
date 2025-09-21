@@ -28,13 +28,22 @@ export class LoginComponent {
     this.error = null;
     this.loading = true;
     const { username, appPassword } = this.loginForm.value;
+    const userlogin = this.auth.login(username, appPassword);
+    userlogin.subscribe({
+      next: (response) => {
+        if(response.error){
+           this.error = 'Invalid credentials';
+            this.loading = false;
+        }else{
+            this.router.navigate(['/posts']);
+             this.loading = false;
+        }
+      },
+      error: (err) => {
+         this.loading = false;
+        //console.log(err.error);
+      } 
+    })
 
-    const ok = this.auth.validateCredentials(username, appPassword);
-    this.loading = false;
-    if (ok) {
-      this.router.navigate(['/posts']);
-    } else {
-      this.error = 'Invalid credentials';
-    }
   }
 }
