@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://www.api.saktech.online/wp-json/wp/v2/',
+  apiUrl: 'http://www.api.sakthitech.online/wp-json/wp/v2/',
   localAuthUser: 'admin',
   localAuthPassword: 'password123', // demo only; replace securely later
   supabaseUrl:'https://nrdqsyqysloebjwrndcg.supabase.co',
